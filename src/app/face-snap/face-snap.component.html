@@ -1,0 +1,8 @@
+<h2>{{ faceSnap.title }}</h2>
+<p>{{ faceSnap.description }}</p>
+<p>Mise en ligne le : <strong>{{ faceSnap.createDate }}</strong> </p>
+<p><button  (click)=" onSnap()" >{{ btnText }}</button></p>
+<p>Nombre de like : <b>{{ faceSnap.snap }}</b></p>
+<img [src]="faceSnap.imgaeUrl" [alt]="faceSnap.title" srcset="">
+
+
