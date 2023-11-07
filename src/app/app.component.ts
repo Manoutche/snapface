@@ -7,34 +7,36 @@ import { FaceSnap } from './models/face-snap.models';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  mySnap! : FaceSnap
-  lastSnap! : FaceSnap
-  otherSnap! : FaceSnap
+  mySnaps! : FaceSnap[]
 
   ngOnInit(): void {
-    this.mySnap = new FaceSnap(
-    'OPERAS'
-    , "My photo de profile EDV"
-    ,'http://operasity/assets/img/operas_logo.png'
-    , new Date()
-    , 6
+    this.mySnaps =[{
+    title : 'OPERAS'
+    ,description :  "My photo de profile EDV"
+    ,imgaeUrl :  'http://operasity/assets/img/operas_logo.png'
+    ,createDate : new Date()
+    ,snap : 200
+}
 
-    )
-    this.otherSnap = new FaceSnap(
-    'EDV'
-    , "profile EDV"
-    ,'http://operasity/assets/img/logo.png'
-    , new Date()
-    , 3
+,{
+    title : 'EDV'
+    ,description : "profile EDV"
+    ,imgaeUrl : 'http://operasity/assets/img/logo.png'
+    ,createDate : new Date()
+    ,snap : 3
+    ,location : 'Abidjan'
+  }
 
-    )
-    this.lastSnap = new FaceSnap(
-    'ITY'
-    , "ITY photo de profile "
-    ,'http://operasity/assets/img/ity_logo.png'
-    , new Date()
-    , 0
 
-    )
+,{
+    title : 'ITY'
+    ,description : "ITY photo de profile "
+    ,imgaeUrl : 'http://operasity/assets/img/ity_logo.png'
+    ,createDate :  new Date()
+    ,snap :  0
+    ,location : 'Zouan Hin'
+  }]
+
+
   }
 }
