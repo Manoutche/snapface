@@ -12,7 +12,6 @@ export class FaceSnapServicve {
     ,createDate : new Date()
     ,snap : 200
 }
-
 ,{
     id:2
     ,title : 'EDV'
@@ -21,10 +20,7 @@ export class FaceSnapServicve {
     ,createDate : new Date()
     ,snap : 3
     ,location : 'Abidjan'
-  }
-
-
-,{
+  },{
     id:3
     ,title : 'ITY'
     ,description : "ITY photo de profile "
@@ -36,6 +32,31 @@ export class FaceSnapServicve {
 
   getAllFaceSnaps() : FaceSnap[] {
     return this.mySnaps
+  }
+
+  getFaceSnapsById(faceSnapId : number): FaceSnap {
+    const faceSnap = this.mySnaps.find( faceSnap => faceSnap.id === faceSnapId)
+    if (faceSnap) {
+      return faceSnap
+    }else{
+      throw new Error("FaceSnap Not found !");
+    }
+  }
+
+
+
+  likeFaceSnapById(faceSnapId : number, action : string): void {
+    const faceSnap = this.getFaceSnapsById(faceSnapId)
+    action == "J'aime" ? faceSnap.snap++ : faceSnap.snap--
+  }
+  disLikeFaceSnapById(faceSnapId : number): void {
+    const faceSnap = this.mySnaps.find( faceSnap => faceSnap.id === faceSnapId)
+    if (faceSnap) {
+      faceSnap.snap-- ;
+    }else{
+      throw new Error("FaceSnap Not found !");
+
+    }
   }
 }
 
