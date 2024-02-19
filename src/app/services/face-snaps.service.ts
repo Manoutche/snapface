@@ -43,20 +43,10 @@ export class FaceSnapServicve {
     }
   }
 
-
-
   likeFaceSnapById(faceSnapId : number, action : string): void {
     const faceSnap = this.getFaceSnapsById(faceSnapId)
-    action == "J'aime" ? faceSnap.snap++ : faceSnap.snap--
+    action != "J'aime" ? faceSnap.snap++ : faceSnap.snap--
   }
-  disLikeFaceSnapById(faceSnapId : number): void {
-    const faceSnap = this.mySnaps.find( faceSnap => faceSnap.id === faceSnapId)
-    if (faceSnap) {
-      faceSnap.snap-- ;
-    }else{
-      throw new Error("FaceSnap Not found !");
 
-    }
-  }
 }
 
