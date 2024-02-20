@@ -1,22 +1,25 @@
-import { Component, Input } from '@angular/core';
-import { FaceSnap } from '../models/face-snap.models';
+import { FaceSnap } from './../models/face-snap.models';
+import { Component, OnInit } from '@angular/core';
 import { FaceSnapServicve } from '../services/face-snaps.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-single-face-snap',
   templateUrl: './single-face-snap.component.html',
   styleUrls: ['./single-face-snap.component.scss']
 })
-export class SingleFaceSnapComponent {
-  @Input() faceSnap! : FaceSnap
-
+export class SingleFaceSnapComponent implements OnInit {
+  faceSnap !: FaceSnap
   btnText! : string
 
-  constructor(private faceSnapsService : FaceSnapServicve){
+  constructor(private faceSnapsService : FaceSnapServicve, private route: ActivatedRoute){
 
   }
   ngOnInit() {
     this.btnText = "J'aime"
+    const faceSnapId = +this.route.snapshot.params['id'];
+
+    this.faceSnap = this.faceSnapsService.getFaceSnapsById(faceSnapId )
 
   }
   onSnap(){
