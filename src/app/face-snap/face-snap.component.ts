@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FaceSnap } from '../models/face-snap.models';
-import { FaceSnapServicve } from '../services/face-snaps.service';
+import { FaceSnapService } from '../services/face-snaps.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,7 +13,7 @@ export class FaceSnapComponent implements OnInit{
 
   btnText! : string
 
-  constructor(private faceSnapsService : FaceSnapServicve, private router : Router){
+  constructor(private faceSnapsService : FaceSnapService, private router : Router){
 
   }
   ngOnInit() {

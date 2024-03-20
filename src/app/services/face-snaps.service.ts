@@ -3,7 +3,7 @@ import { FaceSnap } from '../models/face-snap.models';
 @Injectable({
   providedIn: 'root'
 })
-export class FaceSnapServicve {
+export class FaceSnapService {
   mySnaps: FaceSnap[] =[{
     id : 1
     ,title : 'OPERAS'
@@ -48,5 +48,14 @@ export class FaceSnapServicve {
     action != "J'aime" ? faceSnap.snap++ : faceSnap.snap--
   }
 
+  addFaceSnap(newData:{title:string, description:string, location?:string,imgaeUrl:string}):void {
+    const faceSnap: FaceSnap ={
+      ...newData,
+      createDate : new Date(),
+        id: this.mySnaps[this.mySnaps.length -1].id + 1,
+        snap:0
+    }
+    this.mySnaps.push(faceSnap)
+  }
 }
 

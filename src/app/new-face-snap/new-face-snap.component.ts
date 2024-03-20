@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable, map, tap } from 'rxjs';
 import { FaceSnap } from '../models/face-snap.models';
+import { FaceSnapService } from '../services/face-snaps.service';
 
 @Component({
   selector: 'app-new-face-snap',
@@ -12,16 +13,22 @@ export class NewFaceSnapComponent implements OnInit {
 
   snapForm!: FormGroup;
   faceSnapeView$!: Observable<FaceSnap>
-  constructor(private formBuid: FormBuilder){
+  urlRegex!: RegExp;
+
+  constructor(private formBuid: FormBuilder, private faceSnapsService: FaceSnapService){
 
   }
 
   ngOnInit(): void {
+    this.urlRegex = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)/;
     this.snapForm = this.formBuid.group({
-       title : "la mine d'or de Lafigué",
-       description : "Le canadien Endeavour mining annonce un investissement de 448 millions de dollars, soit 300,7 milliards FCFA, pour la construction de sa mine d'or Lafigué, un important projet aurifère situé dans le centre- nord de la Côte d'Ivoire, dont il a décroché la licence d'exploration en 2015.",
-       imgaeUrl : 'https://www.sikafinance.com/handlers/image_news_get.ashx?id=90B1825D-C3B1-488E-AA45-3B5B5D5DE580',
-       location : 'Dabakala',
+       title : [null,Validators.required],
+       description : [null,Validators.required],
+       imgaeUrl : [null,[Validators.required,Validators.pattern(this.urlRegex)]],
+      //  'assets/aire_speed.jpg'
+       location : [null],
+    },{
+      updateOn: 'blur',
     });
     this.faceSnapeView$ = this.snapForm.valueChanges.pipe(
       map(formValue => ({
