@@ -24,8 +24,8 @@
 </div>
 <div class="face-snap-card" *ngIf="faceSnapeView$ | async as cureFace  ">
   <h2>{{ cureFace.title | uppercase }}</h2>
-    <p>Mis en ligne {{ cureFace.createDate | date: 'à HH:mm, le d MMMM yyyy' }}</p>
-    <img [src]="cureFace.imgaeUrl" [alt]="cureFace.title">
+    <p>Mis en ligne {{ cureFace.createdDate | date: 'à HH:mm, le d MMMM yyyy' }}</p>
+    <img [src]="cureFace.imageUrl" [alt]="cureFace.title">
     <p>{{ cureFace.description }}</p>
     <p *ngIf="cureFace.location">Photo prise à {{ cureFace.location }}</p>
 

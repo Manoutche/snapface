@@ -1,59 +1,35 @@
 import { Injectable }  from '@angular/core';
 import { FaceSnap } from '../models/face-snap.models';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class FaceSnapService {
-  mySnaps: FaceSnap[] =[{
-    id : 1
-    ,title : 'OPERAS'
-    ,description :  "My photo de profile EDV"
-    ,imgaeUrl :  'http://operasity/assets/img/operas_logo.png'
-    ,createDate : new Date()
-    ,snap : 200
-}
-,{
-    id:2
-    ,title : 'EDV'
-    ,description : "profile EDV"
-    ,imgaeUrl : 'http://operasity/assets/img/logo.png'
-    ,createDate : new Date()
-    ,snap : 3
-    ,location : 'Abidjan'
-  },{
-    id:3
-    ,title : 'ITY'
-    ,description : "ITY photo de profile "
-    ,imgaeUrl : 'http://operasity/assets/img/ity_logo.png'
-    ,createDate :  new Date()
-    ,snap :  0
-    ,location : 'Zouan Hin'
-  }]
+  constructor (private http: HttpClient){
 
-  getAllFaceSnaps() : FaceSnap[] {
-    return this.mySnaps
+  }
+  mySnaps: FaceSnap[] =[]
+
+  getAllFaceSnaps() : Observable <FaceSnap[]> {
+    return this.http.get<FaceSnap[]>('http://localhost:3000/facesnaps')
   }
 
-  getFaceSnapsById(faceSnapId : number): FaceSnap {
-    const faceSnap = this.mySnaps.find( faceSnap => faceSnap.id === faceSnapId)
-    if (faceSnap) {
-      return faceSnap
-    }else{
-      throw new Error("FaceSnap Not found !");
-    }
+  getFaceSnapsById(faceSnapId : number):  Observable <FaceSnap> {
+      return this.http.get<FaceSnap>(`http://localhost:3000/facesnaps/${faceSnapId}`)
   }
 
   likeFaceSnapById(faceSnapId : number, action : string): void {
-    const faceSnap = this.getFaceSnapsById(faceSnapId)
-    action != "J'aime" ? faceSnap.snap++ : faceSnap.snap--
+    // const faceSnap = this.getFaceSnapsById(faceSnapId)
+    // action != "J'aime" ? faceSnap.snap++ : faceSnap.snap--
   }
 
-  addFaceSnap(newData:{title:string, description:string, location?:string,imgaeUrl:string}):void {
+  addFaceSnap(newData:{title:string, description:string, location?:string,imageUrl:string}):void {
     const faceSnap: FaceSnap ={
       ...newData,
-      createDate : new Date(),
+      createdDate : new Date(),
         id: this.mySnaps[this.mySnaps.length -1].id + 1,
-        snap:0
+        snaps:0
     }
     this.mySnaps.push(faceSnap)
   }
