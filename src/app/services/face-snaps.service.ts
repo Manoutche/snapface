@@ -31,14 +31,20 @@ export class FaceSnapService {
     )
   }
 
-  addFaceSnap(newData:{title:string, description:string, location?:string,imageUrl:string}):void {
-    const faceSnap: FaceSnap ={
-      ...newData,
+  addFaceSnap(newData:{title:string, description:string, location?:string,imageUrl:string}): Observable <FaceSnap> {
+
+    return this.getAllFaceSnaps().pipe(
+      map(faceSnap =>[...faceSnap].sort((a:FaceSnap, b:FaceSnap)=>a.id - b.id)),
+      map(sorteFaceSnap => sorteFaceSnap[sorteFaceSnap.length - 1]),
+      map(prevFaceSnap => ({
+       ...newData,
       createdDate : new Date(),
-        id: this.mySnaps[this.mySnaps.length -1].id + 1,
+        id: prevFaceSnap.id + 1,
         snaps:0
-    }
-    this.mySnaps.push(faceSnap)
+      })),
+      switchMap(newFaceSnap =>this.http.post<FaceSnap>('http://localhost:3000/facesnaps',newFaceSnap))
+    )
+
   }
 }
 

@@ -29,7 +29,7 @@ export class NewFaceSnapComponent implements OnInit {
     this.snapForm = this.formBuid.group({
        title : [null,Validators.required],
        description : [null,Validators.required],
-       imgaeUrl : [null,[Validators.required,Validators.pattern(this.urlRegex)]],
+       imageUrl : [null,[Validators.required,Validators.pattern(this.urlRegex)]],
       //  'assets/aire_speed.jpg'
        location : [null],
     },{
@@ -48,8 +48,10 @@ export class NewFaceSnapComponent implements OnInit {
   }
 
   onSubmitForm(): void {
-    this.faceSnapsService.addFaceSnap(this.snapForm.value)
-    this.router.navigateByUrl('/facesnaps')
+    this.faceSnapsService.addFaceSnap(this.snapForm.value).pipe(
+      tap(()=> this.router.navigateByUrl('/facesnaps'))
+    ).subscribe()
+
   }
 
 }
