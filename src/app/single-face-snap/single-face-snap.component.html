@@ -3,7 +3,7 @@
   <h2>{{ faceSnap.title | titlecase }}</h2>
   <p>{{ faceSnap.description }}</p>
   <p>Mise en ligne le : <strong>{{ faceSnap.createdDate | date: 'à HH:mm, le d MMMM yyyy' }}</strong> </p>
-  <p><button  (click)=" onSnap()" >{{ btnText }}</button></p>
+  <p><button  (click)=" onSnap(faceSnap.id)" >{{ btnText }}</button></p>
   <p>Nombre de like : <span [ngStyle]="{color : 'rgb(0,'+faceSnap.snaps+',0)'}" >{{ faceSnap.snaps }}</span></p>
   <p *ngIf="faceSnap.location ">Image du site de : <b>{{ faceSnap.location }}</b></p>
   <p>{{ 344.45 | currency: 'EUR' }}</p>
