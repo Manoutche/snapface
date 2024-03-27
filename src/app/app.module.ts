@@ -6,7 +6,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
 import { CoreModule } from './core/core.module';
-import { FaceSnapsModule } from './face-snaps/face-snaps.module';
+import { AuthModule } from './auth/auth.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +18,7 @@ import { FaceSnapsModule } from './face-snaps/face-snaps.module';
     FormsModule, /** form module */
     HttpClientModule,
     CoreModule,
-    FaceSnapsModule
+    AuthModule
   ],
 
   bootstrap: [AppComponent]
