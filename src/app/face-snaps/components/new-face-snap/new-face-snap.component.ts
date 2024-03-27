@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable, map, tap } from 'rxjs';
-import { FaceSnap } from '../core/models/face-snap.models';
-import { FaceSnapService } from '../core/services/face-snaps.service';
 import { Router } from '@angular/router';
+import { FaceSnap } from 'src/app/core/models/face-snap.models';
+import { FaceSnapService } from 'src/app/core/services/face-snaps.service';
 
 @Component({
   selector: 'app-new-face-snap',
